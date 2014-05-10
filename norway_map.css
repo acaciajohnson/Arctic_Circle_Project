@@ -1,0 +1,64 @@
+#frame {
+    position: absolute;
+    width: 600px;
+    height: 450px;
+    background: black;
+    overflow: hidden;
+}
+
+#map {
+    background: url("images/nordland_zoom.png");
+    position: relative;
+    top: -200px;
+    left: -400px;
+    background-size: 2048px 1388px;
+    width: 2048px;
+    height: 1388px;
+    cursor: move;
+}
+
+.pane { /*generic window pane class*/
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  /*cursor: move;*/
+}
+
+.pane1 { /*generic window pane class*/
+  position: absolute;
+  width: 100px;
+  height: 600px;
+  background: transparent;
+  /*cursor: move;*/
+}
+
+.a1 { left:28%;    top:31%; }
+.a2 { left: 24%; top:28%; }
+.a3 { left: 38%; top:31%; }
+.a4 { left: 17%; top:45%; }
+.a5 { left: 40%; top:35%; }
+.a6 { left: 47%; top:38%; }
+.a7 { left: 83%; top:25.5%; }
+
+}
+iframe {
+    position: absolute;
+    width: 1024px;
+    height: 768px;
+    z-index:0;
+}
+
+
+
+.circle {  width:  80px;
+  height: 80px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.white {
+	background: rgba(255,255,255,.9);
+	}

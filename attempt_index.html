@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Interpolar</title>
+  <link rel="stylesheet" type="text/css" href="shadowbox-3.0.3/shadowbox.css">
+  <link rel="stylesheet" type="text/css" href="arctic_dreams.css">
+
+  <style>
+  body
+{
+background-image:url('images/nightsky_background.png');
+background-color:#000000;
+}
+  
+  
+  .map-frame {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+  }
+  #norway-map {
+    background: url("images/arctic_circle_background.png");
+    background-position: -1500px -500px;
+    width: 864px;
+    height: 864px;
+    cursor: move;
+  }
+  
+  #alaska-map {
+    background: url("images/norway_map.jpg");
+    background-position: -1500px -500px;
+    width: 864px;
+    height: 864px;
+    cursor: move;
+  }
+  
+    #iceland-map {
+    background: url("images/norway_map.jpg");
+    background-position: -1500px -500px;
+    width: 864px;
+    height: 864px;
+    cursor: move;
+  }
+  </style>
+</head>
+<body>
+
+<div id="frame">
+
+	 <div class="elemLights"> <img src="images/northernlights_1.png">  </div>
+
+	<div id="elemMap">
+		<img id="map-image" src="images/arctic_circle_background.png" width="864" height="864" orgWidth="864" orgHeight="864" usemap="#continents">
+		<map name="continents" id="map-areas">
+
+		 <area id="norway" href="#" shape="poly" coords="814, 371, 819, 355, 814, 346, 805, 335, 791, 326, 765, 326, 729, 318, 715, 309, 698, 294, 685, 282, 667, 270, 665, 290, 681, 303, 713, 331, 739, 340, 763, 351, 782, 364, 804, 369" style="outline:none;">
+			<area id="iceland" href="#" shape="poly" coords="725, 495, 725, 477, 731, 473, 746, 479, 752, 496, 752, 522, 736, 530, 720, 521" style="outline:none;">
+			<area id="alaska" href="#" shape="poly" coords="225, 551, 216, 527, 208, 488, 194, 466, 171, 457, 162, 451, 155, 472, 153, 473, 141, 451, 129, 451, 129, 472, 131, 487, 117, 482, 100, 475, 81, 475, 88, 503, 88, 535, 48, 511, 42, 494, 85, 547, 111, 561, 138, 588, 151, 623, 150, 670, 145, 711, 160, 663, 164, 617, 174, 596" style="outline:none;">
+		<area shape="rect" coords="592,337,594,339" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+		</map>
+	</div> <!-- /elemMap -->
+</div> <!-- /frame -->
+
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="shadowbox-3.0.3/shadowbox.js"></script>
+<script>
+  
+//wait until page finishes loading (only to do this once per page)
+window.onload = function() {
+
+   /* Setup and Initialize
+     -------------------------------------------------- */
+
+  //initialize the shadowbox library
+  //skip the initial setup (it's normally designed to work with links on a page)
+  Shadowbox.init({skipSetup: true,
+    onFinish: function(elem) {
+      onMapLoadComplete(elem);
+    }}); 
+
+  
+  /* Register Event Handlers
+     -------------------------------------------------- */
+
+  var onMapLoadComplete = function(elem) {
+    //after any large map loads, make it draggable
+    $('.large-map').draggable();
+  };
+
+  /*
+   * Event Handlers for Alaska
+   */
+
+  $('#alaska').on('mouseover', function() {
+
+    $('#map-image').attr('src', 'images/alaska_highlight.png');
+  });
+
+  $('#alaska').on('click', function() {
+  
+  	Shadowbox.open({
+      content:    "norway_map.html",
+      player:     "iframe",
+      title:      " ",
+      height:     450,
+      width:      600
+    });
+  });
+
+  /*
+   * Event Handlers for Norway
+   */
+
+  $('#norway').on('mouseover', function() {
+    $('#map-image').attr('src', 'images/norway_highlight.png');
+  });
+
+  $('#norway').on('click', function() {
+
+    Shadowbox.open({
+      content:    "norway_map.html",
+      player:     "iframe",
+      title:      " ",
+      height:     450,
+      width:      600
+    });
+  });
+  
+   /*
+   * Event Handlers for Iceland
+   */
+
+  $('#iceland').on('mouseover', function() {
+
+    $('#map-image').attr('src', 'images/iceland_highlight.png');
+  });
+
+  $('#iceland').on('click', function() {
+  
+  	Shadowbox.open({
+      content:    "norway_map.html",
+      player:     "iframe",
+      title:      " ",
+      height:     450,
+      width:      600
+    });
+  });
+
+  /*
+   * Event Handlers for all Continents (only two) 
+   */
+
+  //select multiple elements to attach event handlers to by using commas (just like selecting in CSS)
+  $('#alaska, #norway, #iceland').on('mouseout', function() {
+
+    $('#map-image').attr('src', 'images/arctic_circle_background.png');
+  });
+};
+</script>
+</body>
+</html>

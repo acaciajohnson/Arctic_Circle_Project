@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Map Example</title>
+  <link rel="stylesheet" type="text/css" href="shadowbox-3.0.3/shadowbox.css">
+
+  <style>
+  .map-frame {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+  }
+  #australia-map {
+    background: url("images/worldmap_large.jpg");
+    background-position: -1500px -500px;
+    width: 6972px;
+    height: 3880px;
+    cursor: move;
+  }
+  #northamerica-map {
+    background: url("images/worldmap_large.jpg");
+    background-position: -1500px -500px;
+    width: 6972px;
+    height: 3880px;
+    cursor: move;
+  }
+  </style>
+</head>
+<body>
+
+<img id="map-image" src="images/worldmap.png" width="594" height="339" orgWidth="594" orgHeight="339" usemap="#continents">
+<map name="continents" id="map-areas">
+<area id="north-america" href="#" shape="rect" coords="63,87,180,173" style="outline:none;">
+<area id="australia" href="#" shape="rect" coords="461,235,567,306" style="outline:none;">
+<area shape="rect" coords="592,337,594,339" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+</map>
+
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="shadowbox-3.0.3/shadowbox.js"></script>
+<script>
+  
+//wait until page finishes loading (only to do this once per page)
+window.onload = function() {
+
+   /* Setup and Initialize
+     -------------------------------------------------- */
+
+  //you'll need several of these for each draggable map area. this is the html that will get loaded into the shadowbox
+  var mapAustraliaHtml    = '<div class="map-frame"><div class="large-map" id="australia-map"></div></div>'
+    , mapNorthAmericaHtml = '<div class="map-frame"><div class="large-map" id="australia-map"></div></div>';
+
+  //initialize the shadowbox library
+  //skip the initial setup (it's normally designed to work with links on a page)
+  Shadowbox.init({skipSetup: true,
+    onFinish: function(elem) {
+      onMapLoadComplete(elem);
+    }}); 
+
+  
+  /* Register Event Handlers
+     -------------------------------------------------- */
+
+  var onMapLoadComplete = function(elem) {
+    //after any large map loads, make it draggable
+    $('.large-map').draggable();
+  };
+
+  /*
+   * Event Handlers for North America
+   */
+
+  $('#north-america').on('mouseover', function() {
+
+    $('#map-image').attr('src', 'images/worldmap_northamerica.png');
+  });
+
+  $('#north-america').on('click', function() {
+
+    Shadowbox.open({
+      content:    mapNorthAmericaHtml,
+      player:     "html",
+      title:      "North America",
+      height:     350,
+      width:      350
+    });
+  });
+
+  /*
+   * Event Handlers for Australia
+   */
+
+  $('#australia').on('mouseover', function() {
+    $('#map-image').attr('src', 'images/worldmap_australia.png');
+  });
+
+  $('#australia').on('click', function() {
+
+    Shadowbox.open({
+      content:    mapAustraliaHtml,
+      player:     "html",
+      title:      "Australia",
+      height:     350,
+      width:      350
+    });
+  });
+
+  /*
+   * Event Handlers for all Continents (only two) 
+   */
+
+  //select multiple elements to attach event handlers to by using commas (just like selecting in CSS)
+  $('#north-america, #australia').on('mouseout', function() {
+
+    $('#map-image').attr('src', 'images/worldmap.png');
+  });
+};
+</script>
+</body>
+</html>
